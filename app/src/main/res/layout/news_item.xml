@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/default_half_margin">
+    android:layout_margin="@dimen/default_half_margin"
+    app:cardBackgroundColor="?attr/colorSurface">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -28,6 +29,7 @@
             android:layout_marginTop="@dimen/default_margin"
             android:layout_marginEnd="@dimen/default_margin"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="?attr/colorOnSurface"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -73,7 +75,8 @@
             android:src="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="@+id/btnOpenLink"
             app:layout_constraintEnd_toStartOf="@+id/ivShare"
-            app:layout_constraintTop_toTopOf="@+id/btnOpenLink" />
+            app:layout_constraintTop_toTopOf="@+id/btnOpenLink"
+            app:tint="?attr/colorSecondaryVariant" />
 
         <ImageView
             android:id="@+id/ivShare"
@@ -89,7 +92,8 @@
             android:src="@drawable/ic_share"
             app:layout_constraintBottom_toBottomOf="@+id/btnOpenLink"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/btnOpenLink" />
+            app:layout_constraintTop_toTopOf="@+id/btnOpenLink"
+            app:tint="?attr/colorSecondaryVariant" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
