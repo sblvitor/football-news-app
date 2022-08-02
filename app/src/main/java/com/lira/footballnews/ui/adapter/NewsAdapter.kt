@@ -1,10 +1,13 @@
 package com.lira.footballnews.ui.adapter
 
+import android.content.Intent
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.lira.footballnews.databinding.NewsItemBinding
 import com.lira.footballnews.domain.News
+import com.squareup.picasso.Picasso
 
 class NewsAdapter(private val items: ArrayList<News>): RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
 
@@ -26,6 +29,15 @@ class NewsAdapter(private val items: ArrayList<News>): RecyclerView.Adapter<News
 
         holder.tvTitle.text = item.title
         holder.tvDescription.text = item.description
+        Picasso.get().load(item.image)
+            .fit()
+            .into(holder.ivThumbnail)
+
+        holder.btnOpenLink.setOnClickListener {
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(item.link)
+            holder.itemView.context.startActivity(intent)
+        }
     }
 
     override fun getItemCount(): Int {

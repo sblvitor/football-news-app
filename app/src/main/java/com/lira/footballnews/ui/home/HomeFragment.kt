@@ -28,7 +28,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        //val textView: TextView = binding.textHome
+
         binding.rvNews.layoutManager = LinearLayoutManager(context)
         //binding.rvNews.setHasFixedSize(true)
         homeViewModel.news.observe(viewLifecycleOwner, Observer {
