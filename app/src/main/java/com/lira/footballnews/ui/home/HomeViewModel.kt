@@ -16,27 +16,28 @@ class HomeViewModel : ViewModel() {
         DOING, DONE, ERROR
     }
 
-    private val _news = MutableLiveData<List<News>>().apply {
+    private val _news = MutableLiveData<List<News>>()
+    private val _state = MutableLiveData<State>()
+
+    init {
         findNews()
     }
 
-    private val _state = MutableLiveData<State>()
-
-    private fun MutableLiveData<List<News>>.findNews() {
-        //_state.value = State.DOING
+    fun findNews() {
+        _state.value = State.DOING
         FootballNewsRepository.remoteApi.getNews().enqueue(object : Callback<List<News>> {
             override fun onResponse(call: Call<List<News>>, response: Response<List<News>>) {
                 if (response.isSuccessful) {
-                    value = response.body()!!
-                    //_state.value = State.DONE
+                    _news.value = response.body()!!
+                    _state.value = State.DONE
                 } else {
-                    //_state.value = State.ERROR
+                    _state.value = State.ERROR
                 }
             }
 
             override fun onFailure(call: Call<List<News>>, t: Throwable) {
                 t.printStackTrace()
-                //_state.value = State.ERROR
+                _state.value = State.ERROR
             }
 
         })
@@ -49,6 +50,5 @@ class HomeViewModel : ViewModel() {
     suspend fun saveNews(news: News){
         FootballNewsRepository.localDb.newsDao().insert(news)
     }
-
 
 }
