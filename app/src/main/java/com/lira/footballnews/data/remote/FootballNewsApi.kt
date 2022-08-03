@@ -7,6 +7,6 @@ import retrofit2.http.GET
 interface FootballNewsApi {
 
     @GET("news.json")
-    fun getNews(): Call<ArrayList<News>>
+    fun getNews(): Call<List<News>>
 
 }

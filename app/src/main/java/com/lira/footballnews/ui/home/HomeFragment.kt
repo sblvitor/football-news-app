@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.lira.footballnews.R
 import com.lira.footballnews.databinding.FragmentHomeBinding
 import com.lira.footballnews.ui.adapter.NewsAdapter
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment() {
 
@@ -30,12 +29,40 @@ class HomeFragment : Fragment() {
 
 
         binding.rvNews.layoutManager = LinearLayoutManager(context)
-        //binding.rvNews.setHasFixedSize(true)
-        homeViewModel.news.observe(viewLifecycleOwner, Observer {
-            binding.rvNews.adapter = NewsAdapter(it)
-        })
+
+        observeNews()
+        //observeStates()
+
+        binding.srlNews.setOnRefreshListener(this::observeNews)
+
         return root
     }
+
+    private fun observeNews() {
+        homeViewModel.news.observe(viewLifecycleOwner, {
+            binding.rvNews.adapter = NewsAdapter(it) { news ->
+                lifecycleScope.launch {
+                    homeViewModel.saveNews(news)
+                }
+            }
+        })
+    }
+
+    /*private fun observeStates(){
+        homeViewModel.states.observe(viewLifecycleOwner, { state ->
+            when(state){
+                HomeViewModel.State.DOING -> {
+                    binding.srlNews.isRefreshing = true
+                }
+                HomeViewModel.State.DONE -> {
+                    binding.srlNews.isRefreshing = false
+                }
+                HomeViewModel.State.ERROR -> {
+                    binding.srlNews.isRefreshing = false
+                }
+            }
+        })
+    }*/
 
     override fun onDestroyView() {
         super.onDestroyView()

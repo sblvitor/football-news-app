@@ -15,4 +15,6 @@
     <color name="darkColorError">#CF6679</color>
 
     <color name="lightColorError">#B00020</color>
+
+    <color name="favorite_inactive">#737373</color>
 </resources>

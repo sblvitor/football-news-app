@@ -75,8 +75,7 @@
             android:src="@drawable/ic_star"
             app:layout_constraintBottom_toBottomOf="@+id/btnOpenLink"
             app:layout_constraintEnd_toStartOf="@+id/ivShare"
-            app:layout_constraintTop_toTopOf="@+id/btnOpenLink"
-            app:tint="?attr/colorSecondaryVariant" />
+            app:layout_constraintTop_toTopOf="@+id/btnOpenLink" />
 
         <ImageView
             android:id="@+id/ivShare"

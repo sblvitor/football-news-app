@@ -1,13 +1,17 @@
 package com.lira.footballnews.ui.favorites
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.lira.footballnews.data.FootballNewsRepository
+import com.lira.footballnews.domain.News
 
 class FavoritesViewModel : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is favorites Fragment"
+    fun loadFavoriteNews(): LiveData<List<News>> {
+        return FootballNewsRepository.localDb.newsDao().loadFavoriteNews()
     }
-    val text: LiveData<String> = _text
+
+    suspend fun saveNews(news: News){
+        FootballNewsRepository.localDb.newsDao().insert(news)
+    }
 }
